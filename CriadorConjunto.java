@@ -1,9 +1,14 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import Auxiliar.Cor;
+import Auxiliar.EscritorDeCores;
+import Erros.OpcaoInvalidaException;
 
 public class CriadorConjunto {
 
-    boolean criarConjunto;
-    Scanner leitorDados = new Scanner(System.in);
+    private boolean criarConjunto;
+    private Scanner leitorDados = new Scanner(System.in);
 
     public void iniciar(){
 
@@ -28,10 +33,10 @@ public class CriadorConjunto {
                 if(opcaoDesejada == 1 || opcaoDesejada == 2){
                     continuar = false;
                 }else{
-                    System.out.println("Por favor, digite um valor válido.");
-                }
+                    EscritorDeCores.escrever(OpcaoInvalidaException.erro, Cor.ANSI_VERMELHO);
+                };
             } catch (Exception e) {
-                System.out.println("Por favor, digite um valor válido.");
+                EscritorDeCores.escrever(OpcaoInvalidaException.erro, Cor.ANSI_VERMELHO);
                 leitorDados.next();
             }
 
