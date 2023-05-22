@@ -6,10 +6,12 @@ public class EscritorDeCores {
         System.out.println(cor.getValor() + mensagem + Cor.ANSI_RESET.getValor());
     }
 
-    public static String getErro(String mensagem, Cor cor){
-        String erro;
-        erro = cor.getValor() + mensagem + Cor.ANSI_RESET.getValor();
-        return erro;
+    public static void escrever(String mensagem, Cor cor, boolean pularLinha){
+        if(pularLinha){
+            System.out.println(cor.getValor() + mensagem + Cor.ANSI_RESET.getValor());
+        }else{
+            System.out.print(cor.getValor() + mensagem + Cor.ANSI_RESET.getValor());
+        }
     }
 
 }
