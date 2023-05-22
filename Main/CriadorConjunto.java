@@ -108,5 +108,29 @@ public class CriadorConjunto {
         }
 
     }
+
+    public int getOpcaoDesejada() {
+        return opcaoDesejada;
+    }
+
+    public void setOpcaoDesejada(int opcaoDesejada) {
+        this.opcaoDesejada = opcaoDesejada;
+    }
+
+    public Scanner getLeitorDados() {
+        return leitorDados;
+    }
+
+    public void setLeitorDados(Scanner leitorDados) {
+        this.leitorDados = leitorDados;
+    }
+
+    public Conjunto getConjunto() {
+        return conjunto;
+    }
+
+    public void setConjunto(Conjunto conjunto) {
+        this.conjunto = conjunto;
+    }
     
 }
