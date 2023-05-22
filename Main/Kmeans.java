@@ -45,8 +45,8 @@ public class Kmeans {
             }
         }
 
-        centroideAleatorio_1 = new Centroide(conjuntoInicial.getPontos().get(pontoAleatorio_1));
-        centroideAleatorio_2 = new Centroide(conjuntoInicial.getPontos().get(pontoAleatorio_2));
+        centroideAleatorio_1 = new Centroide("Centroide 1", conjuntoInicial.getPontos().get(pontoAleatorio_1));
+        centroideAleatorio_2 = new Centroide("Centroide 2", conjuntoInicial.getPontos().get(pontoAleatorio_2));
 
         if(processamentoDetalhado){
             exibirCentroides(centroideAleatorio_1, centroideAleatorio_2);
@@ -56,15 +56,8 @@ public class Kmeans {
 
     private void exibirCentroides(Ponto cetroide1, Ponto cetroide2) {
 
-        String msg;
-
-        msg = "Centroide 1 - " + cetroide1.getNome() + "(" + 
-        cetroide1.getX() + "," + cetroide1.getY() + ") ";
-        EscritorDeCores.escrever(msg , Cor.ANSI_CIANO);
-
-        msg = "Centroide 2 - " + cetroide2.getNome() + "(" + 
-        cetroide2.getX() + "," + cetroide2.getY() + ") ";
-        EscritorDeCores.escrever(msg , Cor.ANSI_CIANO);
+        EscritorDeCores.escrever(cetroide1.toString() , Cor.ANSI_CIANO);
+        EscritorDeCores.escrever(cetroide2.toString() , Cor.ANSI_CIANO);
 
     }
 

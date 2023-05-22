@@ -19,8 +19,7 @@ public class ExibidorConjunto {
 
         detalheConjunto = conjunto.getNome() + "[ ";
         for (Ponto ponto : conjunto.getPontos()) {
-            detalheConjunto += ponto.getNome() + "(" + 
-            ponto.getX() + "," + ponto.getY() + ") ";
+            detalheConjunto += ponto.toString();
         }
         detalheConjunto += "]";
 

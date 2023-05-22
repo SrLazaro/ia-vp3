@@ -1,9 +1,9 @@
 package Main;
 public class Ponto {
 
-    private String nome;
-    private double x;
-    private double y;
+    protected String nome;
+    protected double x;
+    protected double y;
 
     public Ponto(String nome, double x, double y) {
         this.nome = nome;
@@ -33,6 +33,12 @@ public class Ponto {
 
     public void setY(double y) {
         this.y = y;
+    }
+
+    public String toString() {
+        return getNome() + "(" + 
+               getX() + "," + 
+               getY() + ") ";
     }
 
 }
