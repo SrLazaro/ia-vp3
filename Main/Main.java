@@ -1,3 +1,4 @@
+package Main;
 public class Main{
 
     public static CriadorConjunto criadorConjunto = new CriadorConjunto();

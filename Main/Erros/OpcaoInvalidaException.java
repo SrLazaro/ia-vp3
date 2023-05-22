@@ -1,4 +1,4 @@
-package Erros;
+package Main.Erros;
 
 public class OpcaoInvalidaException extends Exception{
 

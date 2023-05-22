@@ -1,9 +1,14 @@
+package Main;
 import java.util.ArrayList;
 
 public class Conjunto {
     
     private String nome;
     private ArrayList<Ponto> pontos = new ArrayList<Ponto>();
+
+    public Conjunto(String nome) {
+        this.nome = nome;
+    }
     
     public Conjunto(String nome, ArrayList<Ponto> pontos) {
         this.nome = nome;

@@ -1,4 +1,4 @@
-package Auxiliar;
+package Main.Auxiliar;
 
 public class EscritorDeCores {
     

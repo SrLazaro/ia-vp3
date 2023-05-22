@@ -1,4 +1,4 @@
-package Auxiliar;
+package Main.Auxiliar;
 public enum Cor {
     
     ANSI_RESET("\u001B[0m"),
