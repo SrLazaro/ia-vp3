@@ -29,7 +29,41 @@ public class Kmeans {
 
     private void buscarConjunto(Centroide centroide1, Centroide centroide2) {
         
+
         calcularDistanciasCentroides(centroide1, centroide2);
+        criarConjuntosCentroides(centroide1, centroide2);
+        verificarSeHouveMudancasNosConjuntos();
+
+
+    }
+
+    private void verificarSeHouveMudancasNosConjuntos() {
+    }
+
+    private void criarConjuntosCentroides(Centroide centroide1, Centroide centroide2) {
+        
+        double distancia_centroide_1, distancia_centroide_2 = 0;
+        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
+
+        pontos = conjuntoInicial.getPontos();
+
+        for (Ponto ponto : pontos) {
+
+            distancia_centroide_1 = centroide1.getDistancia(ponto);
+            distancia_centroide_2 = centroide2.getDistancia(ponto);
+
+            if(distancia_centroide_1 < distancia_centroide_2){
+                centroide1.getConjunto().getPontos().add(ponto);
+            }else{
+                centroide2.getConjunto().getPontos().add(ponto);
+            }
+
+        }
+
+        if(processamentoDetalhado){
+            ExibidorConjunto.exibir(centroide1.getConjunto(), Cor.ANSI_ROXA);
+            ExibidorConjunto.exibir(centroide2.getConjunto(), Cor.ANSI_VERDE);
+        } 
 
     }
 
@@ -45,19 +79,9 @@ public class Kmeans {
             distancia_centroide_1 = calcularDistancia(centroide1, ponto);
             distancia_centroide_2 = calcularDistancia(centroide2, ponto);
 
-            if(distancia_centroide_1 < distancia_centroide_2){
-                centroide1.getDistancias().add(new DistanciaPonto(ponto, distancia_centroide_1));
-                centroide1.getConjunto().getPontos().add(ponto);
-            }else{
-                centroide2.getDistancias().add(new DistanciaPonto(ponto, distancia_centroide_2));
-                centroide2.getConjunto().getPontos().add(ponto);
-            }
+            centroide1.getDistancias().add(new DistanciaPonto(ponto, distancia_centroide_1));
+            centroide2.getDistancias().add(new DistanciaPonto(ponto, distancia_centroide_2));
 
-        }
-
-        if(processamentoDetalhado){
-            ExibidorConjunto.exibir(centroide1.getConjunto(), Cor.ANSI_ROXA);
-            ExibidorConjunto.exibir(centroide2.getConjunto(), Cor.ANSI_VERDE);
         }
     
     }
@@ -101,11 +125,11 @@ public class Kmeans {
         }
 
         centroideAleatorio_1 = new Centroide("Centroide 1", 
-                                            conjuntoInicial.getPontos().get(pontoAleatorio_1));
-                                            //conjuntoInicial.getPontos().get(2));
+                                            //conjuntoInicial.getPontos().get(pontoAleatorio_1));
+                                           conjuntoInicial.getPontos().get(2));
         centroideAleatorio_2 = new Centroide("Centroide 2", 
-                                            conjuntoInicial.getPontos().get(pontoAleatorio_2));
-                                            //conjuntoInicial.getPontos().get(7));
+                                           // conjuntoInicial.getPontos().get(pontoAleatorio_2));
+                                            conjuntoInicial.getPontos().get(7));
 
         if(processamentoDetalhado){
             exibirCentroides(centroideAleatorio_1, centroideAleatorio_2);

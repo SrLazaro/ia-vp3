@@ -2,6 +2,8 @@ package Main;
 
 import java.util.ArrayList;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 public class Centroide extends Ponto{
 
     private String nomeCentroide;
@@ -19,6 +21,31 @@ public class Centroide extends Ponto{
         this.nomeCentroide = nomeCentroide;
         this.conjunto = new Conjunto("Conjunto - " + nomeCentroide);
         
+    }
+
+    public Centroide(String nomeCentroide, Ponto ponto, Conjunto conjunto){
+
+        super(nomeCentroide, ponto.getX(), ponto.getY());
+        this.nome = nomeCentroide + " - " + ponto.getNome();
+        this.nomeCentroide = nomeCentroide;
+        this.conjunto = conjunto;
+        this.conjunto.setNome("Conjunto - " + nomeCentroide);
+        
+    }
+
+    public double getDistancia(Ponto ponto){
+        double distancia = 0;
+
+        for (DistanciaPonto distanciaPonto : distancias) {
+            if(distanciaPonto.getPonto().getNome().equals(ponto.getNome())
+            &  distanciaPonto.getPonto().getX() == ponto.getX()
+            &  distanciaPonto.getPonto().getY() == ponto.getY()
+            ){
+                distancia = distanciaPonto.getDistancia();
+            }
+        }
+
+        return distancia;
     }
 
     public Conjunto getConjunto() {
