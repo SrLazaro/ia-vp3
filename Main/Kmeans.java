@@ -101,11 +101,11 @@ public class Kmeans {
         }
 
         centroideAleatorio_1 = new Centroide("Centroide 1", 
-                                            //conjuntoInicial.getPontos().get(pontoAleatorio_1));
-                                            conjuntoInicial.getPontos().get(2));
+                                            conjuntoInicial.getPontos().get(pontoAleatorio_1));
+                                            //conjuntoInicial.getPontos().get(2));
         centroideAleatorio_2 = new Centroide("Centroide 2", 
-                                            //conjuntoInicial.getPontos().get(pontoAleatorio_2));
-                                            conjuntoInicial.getPontos().get(7));
+                                            conjuntoInicial.getPontos().get(pontoAleatorio_2));
+                                            //conjuntoInicial.getPontos().get(7));
 
         if(processamentoDetalhado){
             exibirCentroides(centroideAleatorio_1, centroideAleatorio_2);
