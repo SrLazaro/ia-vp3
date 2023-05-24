@@ -2,16 +2,22 @@ package Main;
 
 import java.util.ArrayList;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 public class Centroide extends Ponto{
 
     private String nomeCentroide;
     Conjunto conjunto;
     private ArrayList<DistanciaPonto> distancias = new ArrayList<DistanciaPonto>();
 
+    public Centroide(String nome, double x, double y) {
+        super(nome, x, y);
+        this.nomeCentroide = nome;
+        this.conjunto = new Conjunto("Conjunto - " + nome);
+    }
+
     public Centroide(String nomeCentroide, String nome, double x, double y) {
         super(nome, x, y);
+        this.nomeCentroide = nomeCentroide;
+        this.conjunto = new Conjunto("Conjunto - " + nomeCentroide);
     }
 
     public Centroide(String nomeCentroide, Ponto ponto){
@@ -23,13 +29,11 @@ public class Centroide extends Ponto{
         
     }
 
-    public Centroide(String nomeCentroide, Ponto ponto, Conjunto conjunto){
+    public Centroide(Centroide centroide, Conjunto conjunto){
 
-        super(nomeCentroide, ponto.getX(), ponto.getY());
-        this.nome = nomeCentroide + " - " + ponto.getNome();
-        this.nomeCentroide = nomeCentroide;
+        super(centroide.getNome(), centroide.getX(), centroide.getY());
+        this.nomeCentroide = centroide.getNomeCentroide();
         this.conjunto = conjunto;
-        this.conjunto.setNome("Conjunto - " + nomeCentroide);
         
     }
 

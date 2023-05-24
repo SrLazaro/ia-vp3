@@ -11,6 +11,9 @@ import Main.Auxiliar.Cor;
 public class Kmeans {
 
     private Conjunto conjuntoInicial;
+    private ArrayList<Conjunto> conjuntoFinal = new ArrayList<Conjunto>();
+    private Centroide centroide1Anterior;
+    private Centroide centroide2Anterior;
     private boolean processamentoDetalhado;
     private Centroide centroideAleatorio_1;
     private Centroide centroideAleatorio_2;
@@ -29,15 +32,100 @@ public class Kmeans {
 
     private void buscarConjunto(Centroide centroide1, Centroide centroide2) {
         
-
         calcularDistanciasCentroides(centroide1, centroide2);
         criarConjuntosCentroides(centroide1, centroide2);
-        verificarSeHouveMudancasNosConjuntos();
-
+        if(verificarSeHouveMudancasNosConjuntos(centroide1, centroide2)){
+            conjuntoFinal = atribuirConjuntoFinal(centroide1, centroide2);
+        }else{
+            CentroidesBase novosCentroide = criarNovosCentroides(centroide1, centroide2);
+            buscarConjunto(novosCentroide.getCentroide1(), novosCentroide.getCentroide2());
+        }
 
     }
 
-    private void verificarSeHouveMudancasNosConjuntos() {
+    private CentroidesBase criarNovosCentroides(Centroide centroide1, Centroide centroide2) {
+        
+        CentroidesBase centroidesBase;
+        Centroide novoCentroide1, novoCentroide2;
+
+        novoCentroide1 = calcularMediaCentroide(centroide1);
+        novoCentroide2 = calcularMediaCentroide(centroide2);
+
+        centroidesBase = new CentroidesBase(novoCentroide1, novoCentroide2);
+
+        atribuirCentroidesAnteriores(centroide1, centroide2);
+
+        return centroidesBase;
+
+    }
+
+    private void atribuirCentroidesAnteriores(Centroide centroide1, Centroide centroide2) {
+        
+        this.centroide1Anterior = atribuirCentroide(centroide1);
+        this.centroide2Anterior = atribuirCentroide(centroide2);
+    
+    }
+
+    private Centroide atribuirCentroide(Centroide centroideParametro) {
+
+        Centroide centroide;
+        Conjunto conjunto;
+
+        conjunto = new Conjunto(centroideParametro.getConjunto().getNome());
+
+        for (Ponto ponto : centroideParametro.getConjunto().getPontos()) {
+            conjunto.getPontos().add(new Ponto(ponto.getNome(), 
+                                    ponto.getX(), 
+                                    ponto.getY()));
+        }
+
+        centroide = new Centroide(centroideParametro, conjunto);
+        
+        return centroide;
+
+    }
+
+    private Centroide calcularMediaCentroide(Centroide centroide) {
+
+        Centroide novoCentroide;
+
+        double quantidadeRegistros = centroide.getConjunto().getPontos().size();
+        double valorXSumarizado = 0, valorYSumarizado = 0;
+
+        for (Ponto ponto : centroide.getConjunto().getPontos()) {
+            valorXSumarizado =+ ponto.getX();
+            valorYSumarizado =+ ponto.getY();
+        }
+
+        novoCentroide = new Centroide(centroide.getNomeCentroide(), valorXSumarizado, valorYSumarizado);
+
+        return novoCentroide;
+
+    }
+
+    private ArrayList<Conjunto> atribuirConjuntoFinal(Centroide centroide1, Centroide centroide2) {
+        return null;
+    }
+
+    private boolean verificarSeHouveMudancasNosConjuntos(Centroide centroide1, Centroide centroide2) {
+        
+        boolean houveMudancas = false;
+
+        if(centroide1Anterior != null){
+            if(centroide1Anterior.getConjunto().getPontos() !=
+               centroide1.getConjunto().getPontos()){
+                    houveMudancas = true;
+            }
+        }
+
+        if(centroide2Anterior != null){
+            if(centroide2Anterior.getConjunto().getPontos() !=
+               centroide2.getConjunto().getPontos()){
+                    houveMudancas = true;
+            }
+        }
+        
+        return houveMudancas;
     }
 
     private void criarConjuntosCentroides(Centroide centroide1, Centroide centroide2) {

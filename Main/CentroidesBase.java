@@ -1,11 +1,14 @@
 package Main;
 
-public class ConjuntoCentroide {
+public class CentroidesBase {
     
     Centroide centroide1;
     Centroide centroide2;
 
-    public ConjuntoCentroide(Centroide centroide1, Centroide centroide2) {
+    public CentroidesBase() {
+    }
+
+    public CentroidesBase(Centroide centroide1, Centroide centroide2) {
         this.centroide1 = centroide1;
         this.centroide2 = centroide2;
     }
