@@ -6,6 +6,7 @@ import java.util.Random;
 import Main.Auxiliar.EscritorDeCores;
 import Main.Auxiliar.ExibidorConjunto;
 import Main.Auxiliar.Calculadora;
+import Main.Auxiliar.ComparadorConjuntos;
 import Main.Auxiliar.Cor;
 
 public class Kmeans {
@@ -57,6 +58,10 @@ public class Kmeans {
         
         CentroidesBase centroidesBase;
         Centroide novoCentroide1, novoCentroide2;
+
+        if(processamentoDetalhado){
+            System.out.println("- Centróides");
+        }
 
         novoCentroide1 = calcularMediaCentroide(centroide1);
         novoCentroide2 = calcularMediaCentroide(centroide2);
@@ -145,15 +150,15 @@ public class Kmeans {
         boolean houveMudancas = true;
 
         if(centroide1Anterior != null){
-            if(centroide1Anterior.getConjunto().getPontos() !=
-               centroide1.getConjunto().getPontos()){
+            if(ComparadorConjuntos.compararConjuntos(centroide1.getConjunto(), 
+            centroide1Anterior.getConjunto())){
                     houveMudancas = false;
             }
         }
 
         if(centroide2Anterior != null){
-            if(centroide2Anterior.getConjunto().getPontos() !=
-               centroide2.getConjunto().getPontos()){
+            if(ComparadorConjuntos.compararConjuntos(centroide2.getConjunto(), 
+            centroide2Anterior.getConjunto())){
                     houveMudancas = false;
             }
         }
@@ -182,6 +187,7 @@ public class Kmeans {
         }
 
         if(processamentoDetalhado){
+            System.out.println("- Conjuntos");
             ExibidorConjunto.exibir(centroide1.getConjunto(), Cor.ANSI_ROXA);
             ExibidorConjunto.exibir(centroide2.getConjunto(), Cor.ANSI_VERDE);
         } 
@@ -206,6 +212,7 @@ public class Kmeans {
         }
 
         if(processamentoDetalhado){
+            System.out.println("- Distâncias");
             exibirDistancias(centroide1, Cor.ANSI_ROXA);
             exibirDistancias(centroide2, Cor.ANSI_VERDE);
         }
@@ -215,13 +222,19 @@ public class Kmeans {
     private void exibirDistancias(Centroide centroide, Cor cor) {
 
         String espacamento = "  ";
-        String saida;
+        String saida = "";
 
         EscritorDeCores.escrever(centroide.getNome(), cor);
         for (DistanciaPonto distancia : centroide.getDistancias()) {
-            saida = espacamento + distancia.getPonto().toString()
-                    + " | " + distancia.getDistancia();
-            EscritorDeCores.escrever(saida, cor);
+
+            if(Double.isNaN(distancia.getDistancia())){
+                saida = espacamento + distancia.getPonto().toString()
+                        + " | ";
+            }else{
+                saida = espacamento + distancia.getPonto().toString()
+                        + " | " + distancia.getDistancia();
+            }
+                    EscritorDeCores.escrever(saida, cor);
         }
 
     }
@@ -286,6 +299,7 @@ public class Kmeans {
 
     private void exibirCentroides(Ponto cetroide1, Ponto cetroide2) {
 
+        System.out.println("- Centróides");
         EscritorDeCores.escrever(cetroide1.toString() , Cor.ANSI_CIANO);
         EscritorDeCores.escrever(cetroide2.toString() , Cor.ANSI_CIANO);
 
