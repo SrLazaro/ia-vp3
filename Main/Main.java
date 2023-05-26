@@ -1,8 +1,10 @@
 package Main;
 
 import Main.Auxiliar.EscritorDeCores;
+import Main.Auxiliar.ExibidorConjunto;
 import Main.Erros.OpcaoInvalidaException;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Main.Auxiliar.Cor;
@@ -21,8 +23,18 @@ public class Main{
         verificarExibicao();
         kmeans = new Kmeans(conjunto, processamentoDetalhado);
         kmeans.iniciar();
+        exibirConjuntoResultado(kmeans.getConjuntoFinal());
         
     }
+    private static void exibirConjuntoResultado(ArrayList<Conjunto> conjuntoFinal) {
+        System.out.println("============================");
+        System.out.println("      Conjuntos Finais");
+        System.out.println("============================");
+        for (Conjunto conjuntoF : conjuntoFinal) {
+            ExibidorConjunto.exibir(conjuntoF);
+        }
+    }
+
     private static void verificarExibicao() {
 
         boolean continuar = true;

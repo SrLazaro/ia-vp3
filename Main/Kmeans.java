@@ -25,9 +25,19 @@ public class Kmeans {
 
         CentroidesBase centroidesAleatorios;
 
+        if(this.processamentoDetalhado){
+            exibirTituloDetalhe();
+        }
+
         centroidesAleatorios = escolherCentroidesAleatorios();
         buscarConjunto(centroidesAleatorios.getCentroide1(), centroidesAleatorios.getCentroide2());
         
+    }
+
+    private void exibirTituloDetalhe() {
+        System.out.println("============================");
+        System.out.println("      Resumo Detalhado");
+        System.out.println("============================");
     }
 
     private void buscarConjunto(Centroide centroide1, Centroide centroide2) {
@@ -115,7 +125,19 @@ public class Kmeans {
     }
 
     private ArrayList<Conjunto> atribuirConjuntoFinal(Centroide centroide1, Centroide centroide2) {
-        return null;
+        
+        ArrayList<Conjunto> conjuntos = new ArrayList<Conjunto>();
+
+        if(centroide1.getConjunto() != null){
+            centroide1.getConjunto().setCor(Cor.ANSI_VERDE);
+            conjuntos.add(centroide1.getConjunto());
+        }
+        if(centroide2.getConjunto() != null){
+            centroide2.getConjunto().setCor(Cor.ANSI_AMARELO);
+            conjuntos.add(centroide2.getConjunto());
+        }
+        
+        return conjuntos;
     }
 
     private boolean verificarSeHouveMudancasNosConjuntos(Centroide centroide1, Centroide centroide2) {

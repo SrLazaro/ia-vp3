@@ -69,7 +69,7 @@ public class CriadorConjunto {
                 ExibidorConjunto.exibir(conjunto, Cor.ANSI_AZUL);
 
                 System.out.println("Deseja continuar?");
-                System.out.print("Não[0] | Sim[qualquer caractere]: ");
+                System.out.print("Sim[qualquer caractere] | Não[0]: ");
                 try {
                     resposta = leitorDados.nextInt();
                     if(resposta == 0){

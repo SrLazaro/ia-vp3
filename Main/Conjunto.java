@@ -1,10 +1,13 @@
 package Main;
 import java.util.ArrayList;
 
+import Main.Auxiliar.Cor;
+
 public class Conjunto {
     
     private String nome;
     private ArrayList<Ponto> pontos = new ArrayList<Ponto>();
+    private Cor cor;
 
     public Conjunto(String nome) {
         this.nome = nome;
@@ -26,6 +29,14 @@ public class Conjunto {
     }
     public void setPontos(ArrayList<Ponto> pontos) {
         this.pontos = pontos;
+    }
+
+    public Cor getCor() {
+        return cor;
+    }
+
+    public void setCor(Cor cor) {
+        this.cor = cor;
     }
 
 }

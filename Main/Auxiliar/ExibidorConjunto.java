@@ -13,15 +13,22 @@ public class ExibidorConjunto {
         exibirConjunto(conjunto, Cor.ANSI_RESET);
     }
 
-    private static void exibirConjunto(Conjunto conjunto, Cor cor){
+    private static void exibirConjunto(Conjunto conjunto, Cor corParametro){
 
         String detalheConjunto;
+        Cor cor;
+
+        cor = corParametro;
 
         detalheConjunto = conjunto.getNome() + "[ ";
         for (Ponto ponto : conjunto.getPontos()) {
             detalheConjunto += ponto.toString();
         }
         detalheConjunto += "]";
+
+        if(conjunto.getCor() != null){
+            cor = conjunto.getCor();
+        }
 
         EscritorDeCores.escrever(detalheConjunto, cor);
 
