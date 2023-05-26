@@ -15,8 +15,6 @@ public class Kmeans {
     private Centroide centroide1Anterior;
     private Centroide centroide2Anterior;
     private boolean processamentoDetalhado;
-    private Centroide centroideAleatorio_1;
-    private Centroide centroideAleatorio_2;
 
     public Kmeans(Conjunto conjuntoInicial, boolean processamentoDetalhado) {
         this.conjuntoInicial = conjuntoInicial;
@@ -25,8 +23,10 @@ public class Kmeans {
 
     public void iniciar() {
 
-        escolherCentroidesAleatorios();
-        buscarConjunto(centroideAleatorio_1, centroideAleatorio_2);
+        CentroidesBase centroidesAleatorios;
+
+        centroidesAleatorios = escolherCentroidesAleatorios();
+        buscarConjunto(centroidesAleatorios.getCentroide1(), centroidesAleatorios.getCentroide2());
         
     }
 
@@ -90,17 +90,28 @@ public class Kmeans {
         Centroide novoCentroide;
 
         double quantidadeRegistros = centroide.getConjunto().getPontos().size();
-        double valorXSumarizado = 0, valorYSumarizado = 0;
+        double valorXSumarizado = 0, valorYSumarizado = 0, mediaX = 0, mediaY = 0;
 
         for (Ponto ponto : centroide.getConjunto().getPontos()) {
-            valorXSumarizado =+ ponto.getX();
-            valorYSumarizado =+ ponto.getY();
+            valorXSumarizado += ponto.getX();
+            valorYSumarizado += ponto.getY();
         }
 
-        novoCentroide = new Centroide(centroide.getNomeCentroide(), valorXSumarizado, valorYSumarizado);
+        mediaX = Calculadora.dividir(valorXSumarizado, quantidadeRegistros);
+        mediaY = Calculadora.dividir(valorYSumarizado, quantidadeRegistros);
+
+        novoCentroide = new Centroide(centroide.getNomeCentroide(), mediaX, mediaY);
+
+        if(processamentoDetalhado){
+            exibirCentroide(novoCentroide);
+        }
 
         return novoCentroide;
 
+    }
+
+    private void exibirCentroide(Centroide centroide) {
+        EscritorDeCores.escrever(centroide.toString() , Cor.ANSI_CIANO);
     }
 
     private ArrayList<Conjunto> atribuirConjuntoFinal(Centroide centroide1, Centroide centroide2) {
@@ -191,13 +202,16 @@ public class Kmeans {
 
     }
 
-    private void escolherCentroidesAleatorios() {
+    private CentroidesBase escolherCentroidesAleatorios() {
 
         Random geradorNumeroAleatorio = new Random();
         boolean continuar = true;
         int qtdPontos;
         int pontoAleatorio_1 = 0;
         int pontoAleatorio_2 = 0;
+        Centroide centroideAleatorio_1;
+        Centroide centroideAleatorio_2;
+        CentroidesBase centroidesAleatorios;
 
         qtdPontos = conjuntoInicial.getPontos().size();
 
@@ -213,15 +227,19 @@ public class Kmeans {
         }
 
         centroideAleatorio_1 = new Centroide("Centroide 1", 
-                                            //conjuntoInicial.getPontos().get(pontoAleatorio_1));
-                                           conjuntoInicial.getPontos().get(2));
+                                           conjuntoInicial.getPontos().get(pontoAleatorio_1));
+                                           //conjuntoInicial.getPontos().get(2));
         centroideAleatorio_2 = new Centroide("Centroide 2", 
-                                           // conjuntoInicial.getPontos().get(pontoAleatorio_2));
-                                            conjuntoInicial.getPontos().get(7));
+                                            conjuntoInicial.getPontos().get(pontoAleatorio_2));
+                                            //conjuntoInicial.getPontos().get(7));
+
+        centroidesAleatorios = new CentroidesBase(centroideAleatorio_1, centroideAleatorio_2);
 
         if(processamentoDetalhado){
             exibirCentroides(centroideAleatorio_1, centroideAleatorio_2);
         }
+
+        return centroidesAleatorios;
 
     }
 
@@ -230,6 +248,46 @@ public class Kmeans {
         EscritorDeCores.escrever(cetroide1.toString() , Cor.ANSI_CIANO);
         EscritorDeCores.escrever(cetroide2.toString() , Cor.ANSI_CIANO);
 
+    }
+
+    public Conjunto getConjuntoInicial() {
+        return conjuntoInicial;
+    }
+
+    public void setConjuntoInicial(Conjunto conjuntoInicial) {
+        this.conjuntoInicial = conjuntoInicial;
+    }
+
+    public ArrayList<Conjunto> getConjuntoFinal() {
+        return conjuntoFinal;
+    }
+
+    public void setConjuntoFinal(ArrayList<Conjunto> conjuntoFinal) {
+        this.conjuntoFinal = conjuntoFinal;
+    }
+
+    public Centroide getCentroide1Anterior() {
+        return centroide1Anterior;
+    }
+
+    public void setCentroide1Anterior(Centroide centroide1Anterior) {
+        this.centroide1Anterior = centroide1Anterior;
+    }
+
+    public Centroide getCentroide2Anterior() {
+        return centroide2Anterior;
+    }
+
+    public void setCentroide2Anterior(Centroide centroide2Anterior) {
+        this.centroide2Anterior = centroide2Anterior;
+    }
+
+    public boolean isProcessamentoDetalhado() {
+        return processamentoDetalhado;
+    }
+
+    public void setProcessamentoDetalhado(boolean processamentoDetalhado) {
+        this.processamentoDetalhado = processamentoDetalhado;
     }
 
 }

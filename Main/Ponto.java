@@ -36,9 +36,19 @@ public class Ponto {
     }
 
     public String toString() {
-        return getNome() + "(" + 
+
+        String textoPonto;
+
+        textoPonto = getNome() + "(" + 
                getX() + "," + 
                getY() + ") ";
+        
+        if(Double.isNaN(getX())
+        || Double.isNaN(getY())){
+            textoPonto = getNome() + "( " + ")";
+        }
+
+        return textoPonto;
     }
 
 }

@@ -52,6 +52,7 @@ public class CriadorConjunto {
         double x, y = 0;
         int contador = 1;
         String nomePonto;
+        int resposta = 0;
 
         while(continuar){
             try {
@@ -68,9 +69,12 @@ public class CriadorConjunto {
                 ExibidorConjunto.exibir(conjunto, Cor.ANSI_AZUL);
 
                 System.out.println("Deseja continuar?");
-                System.out.print("Não[false] | Sim[qualquer caractere]: ");
+                System.out.print("Não[0] | Sim[qualquer caractere]: ");
                 try {
-                    continuar = leitorDados.nextBoolean();
+                    resposta = leitorDados.nextInt();
+                    if(resposta == 0){
+                        continuar = false;
+                    }
                 } catch (Exception e) {
                     leitorDados.next();
                 }
